@@ -205,7 +205,7 @@ Allows your app to destroy content as long as it has permission.
 
 ##### Sample request:
 ```json
-http://api.globalhack4.test.lockerdome.com/app_create_content?
+http://api.globalhack4.test.lockerdome.com/app_destroy_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -232,7 +232,7 @@ Allows your app to fetch information about any content posted on LockerDome.
 
 ##### Sample request:
 ```json
-http://api.globalhack4.test.lockerdome.com/app_create_content?
+http://api.globalhack4.test.lockerdome.com/app_fetch_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
