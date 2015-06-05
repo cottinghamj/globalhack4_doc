@@ -78,7 +78,7 @@ var server = http.createServer(function(req, res){
     var body = [
       "<html>",
       "  <head>",
-      "    <script src='http://globalhack4.test.lockerdome.com/globalhack_app_platform.js'></script>",
+      "    <script src='http://globalhack4.test.lockerdome.com/gh_app_platform.js'></script>",
       "  </head>",
       "  <body>",
       "    <table>",
