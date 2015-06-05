@@ -149,7 +149,7 @@ This API call accepts the following parameters:
 | text        | String  | No            | An optional alt-text for your content                                                           |
 | app_data    | Object  | No            | Optional data passed to your app (unique)                                                       |
 | created_by  | int     | No            | Optional id of the user creating the content                                                    |
-| auth_token  | String  | if created_by | If created_by is set, an auth token allowing your app to publish content as the specified user  |
+| login_token | String  | if created_by | If created_by is set, an auth token allowing your app to publish content as the specified user  |
 
 Let's make a sample request. This sample will be nicely formatted and won't be url-encoded, however, actual requests need to be url-encoded.
 
