@@ -2,6 +2,24 @@
 
 LockerDome applications are made to be extremely flexible and powerful. The primary way that an application interacts with LockerDome is by creating app content, and controlling the rendering of it.
 
+## Table of Contents
+  * [Creating an App](#creating-an-app)
+  * [Creating your first piece of app content](#creating-your-first-piece-of-app-content)
+  * [Handling the hook from the app](#handling-the-hook-from-the-app)
+  * [Client Side APIs](#client-side-apis)
+    * [Initial Data](#initial-data)
+    * [Arguments](#arguments)
+    * [Functions](#functions)
+  * [Server Side APIs](#server-side-apis)
+    * [app_create_content](#app_create_content)
+    * [app_destroy_content](#app_destroy_content)
+    * [app_fetch_content](#app_fetch_content)
+    * [app_update_content](#app_update_content)
+    * [app_fetch_user_content](#app_fetch_user_content)
+    * [app_get_account_name_and_slug](#app_get_account_name_and_slug)
+    * [app_fetch_batch_data](#app_fetch_batch_data)
+    * [Errors](#errors)
+
 ## Creating an App
 
 In order to create an app on LockerDome, a user account must first be created. Follow these steps:
@@ -72,7 +90,7 @@ The `request_width` function allows you to change the width of your app's frame.
 |-------------|---------|---------------------------------------------------------------------------------------|
 | new_width   | String  | The desired width of your frame. This accepts any valid CSS value (400px, 100%, etc.) |
 
-### request_height 
+#### request_height 
 
 The `request_height` function allows you to change the height of your app's frame. 
 
@@ -80,7 +98,7 @@ The `request_height` function allows you to change the height of your app's fram
 |-------------|---------|-----------------------------------------------------------------------------------------|
 | new_height  | String  | The desired height of your frame. This accepts any valid CSS value (400px, 100%, etc.)  |
 
-### request_redirect
+#### request_redirect
 
 Since your app is embedded in an iframe, you won't be able to execute browser redirects. If necessary, LockerDome can do this for you. A call to the `request_redirect` function will redirect the user to a desired URL.
 
