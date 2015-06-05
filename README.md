@@ -40,3 +40,54 @@ Your IFRAME will get certain information from LockerDome about its context. This
 
 ## Server Side APIs
 
+The server-sided app API calls currently consist of the following:
+
++ [app_create_content](#app_create_content)
++ [app_destroy_content](#app_destroy_content)
++ [app_fetch_content](#app_fetch_content)
++ [app_update_content](#app_update_content)
++ [app_fetch_user_content](#app_fetch_user_content)
++ [app_get_account_name_and_slug](#app_get_account_name_and_slug)
++ [app_fetch_batch_data](#app_fetch_batch_data)
+
+All app API calls require the following parameters:
+
+| Parameter   | Type    | Description                         |
+|-------------|---------|-------------------------------------|
+| app_id      | int     | Your app's `app_id`                 |
+| app_secret  | String  | Your app's `app_secret`             |
+
+####app_create_content
+
+Allows your app to create and hang content.
+
+| Parameter   | Type    | Required  | Description                                 |
+|-------------|---------|-----------|---------------------------------------------|
+| name        | String  | No        | Your app content's title. Keep it concise   |
+| thumb_url   | String  | No        | An optional (but recommended) thumbnail url |
+| text        | String  | No        | An optional alt-text for your content       |
+| app_data    | Object  | No        | Optional data passed to your app (unique)   |
+
+####app_destroy_content
+
+Allows your app to destroy content as long as it has permission to.
+
+| Parameter   | Type    | Required  | Description                                 |
+|-------------|---------|-----------|---------------------------------------------|
+| content_id  | int     | Yes       | The `id` of the content to be deleted       |
+
+####app_fetch_content
+
+Allows your app to fetch information about any content posted on LockerDome.
+
+| Parameter   | Type    | Required  | Description                                 |
+|-------------|---------|-----------|---------------------------------------------|
+| content_id  | 
+
+####app_update_content
+
+####app_fetch_user_content
+
+####app_get_account_name_and_slug
+
+####app_fetch_batch_data
