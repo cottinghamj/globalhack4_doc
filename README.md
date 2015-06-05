@@ -69,7 +69,7 @@ For the sake of this tutorial let's assume the following values:
 
 For the tutorial, we'll walk you through [app_create_content](#app_create_content), but you'll have to figure the rest out on your own.
 
-###app_create_content
+### app_create_content
 
 Allows your app to create and hang content.
 
@@ -151,7 +151,7 @@ https://api.lockerdome.com/app_create_content?
 }
 ```
 
-###app_fetch_content
+### app_fetch_content
 
 Allows your app to fetch information about any content posted on LockerDome.
 
@@ -179,9 +179,9 @@ https://api.lockerdome.com/app_create_content?
     "app_data": {
       "data": "some_data"
     },
-    "app_id": 7738711164977218,
-    "created_by": 6597154458173441,
-    "id": 7738813707321411,
+    "app_id": 1337,
+    "created_by": 0,
+    "id": 42,
     "name": "Fun App Content",
     "text": "Isn't my app great?",
     "thumb_url": "http://yourapp.com/app_thumb.png",
@@ -190,10 +190,11 @@ https://api.lockerdome.com/app_create_content?
 }
 ```
 
-##### Response fields:
+### app_update_content
 
+Allows you to update content created by your app. This is useful if your app utilizes the `app_data` field. 
 
-###app_update_content
+##### Parameters: 
 
 | Parameter   | Type    | Required  | Description                                 |
 |-------------|---------|-----------|---------------------------------------------|
@@ -203,20 +204,179 @@ https://api.lockerdome.com/app_create_content?
 | text        | String  | No        | New alt-text for your content               |
 | app_data    | Object  | No        | Updated data for this app content           |
 
-###app_fetch_user_content
+##### Sample request:
+
+```json
+https://api.lockerdome.com/app_update_content?
+{
+  "app_id": 1337,
+  "app_secret": "bananas",
+  "content_id": 42,
+  "name": "Not so fun App Content",
+  "text": "Apparently it wasn't as fun as I thought",
+  "thumb_url": "http://yourapp.com/app_thumb_boring.png",
+  "app_data": {
+    "is_fun": false
+  }
+}
+```
+
+##### Sample response:
+```json
+{
+  "status": true,
+  "result": {
+    "app_data": {
+      "is_fun": false
+    },
+    "app_id": 1337,
+    "created_by": 0,
+    "id": 42,
+    "name": "Not so fun App Content",
+    "text": "Apparently it wasn't as fun as I thought",
+    "thumb_url": "http://yourapp.com/app_thumb_boring.png"
+  }
+}
+```
+
+### app_fetch_user_content
+
+Allows your app to fetch all content created by a specified user.
+
+##### Parameters
 
 | Parameter   | Type    | Required  | Description                                 |
 |-------------|---------|-----------|---------------------------------------------|
 | created_by  | int     | Yes       | The `id` of the user whose content to fetch |
 
-###app_get_account_name_and_slug
+##### Sample request: 
+```json
+https://api.lockerdome.com/app_fetch_user_content?
+{
+  "app_id": 1337,
+  "app_secret": "bananas",
+  "created_by": 0
+}
+```
+##### Sample response: 
+```json
+{
+  "status": true,
+  "result": {
+    "42": {
+      "app_data": {
+        "data": "some_data"
+      },
+      "app_id": 1337,
+      "created_by": 0,
+      "id": 42,
+      "name": "Fun App Content",
+      "text": "Isn't my app great?",
+      "thumb_url": "http://yourapp.com/app_thumb.png",
+      "type": "app_content"
+    },
+    "314159": {
+      "app_data": {
+        "is_fun": false
+      },
+      "app_id": 1337,
+      "created_by": 0,
+      "id": 314159,
+      "name": "Not so fun App Content",
+      "text": "Apparently it wasn't as fun as I thought",
+      "thumb_url": "http://yourapp.com/app_thumb_boring.png",
+      "type": "app_content"
+    }
+  }
+}
+```
+
+### app_get_account_name_and_slug
+
+Allows your app to fetch the account name and slug of specified user(s).
+
+##### Parameters
 
 | Parameter   | Type    | Required  | Description                                 |
 |-------------|---------|-----------|---------------------------------------------|
 | account_ids | int[]   | Yes       | An array of account `id`s to fetch          |
 
-###app_fetch_batch_data
+##### Sample request: 
+```json
+https://api.lockerdome.com/app_get_account_name_and_slug?
+{
+  "app_id": 1337,
+  "app_secret": "bananas",
+  "account_ids": [ 0, 1 ]
+}
+```
+##### Sample response:
+```json
+{
+  "status": true,
+  "result": {
+    "0": {
+      "id": 0,
+      "name": "Harry Gallagher",
+      "slug": "harry"
+    },
+    "1": {
+      "id": 1,
+      "name": "Gabe Lozano",
+      "slug": "gabe"
+    }
+  }
+}
+```
+
+### app_fetch_batch_data
+
+##### Parameters
 
 | Parameter   | Type    | Required  | Description                                 |
 |-------------|---------|-----------|---------------------------------------------|
 | content_ids | int[]   | Yes       | An array of content `id`s to fetch          |
+
+##### Sample request:
+```json
+https://api.lockerdome.com/app_fetch_batch_data?
+{
+  "app_id": 1337,
+  "app_secret": "bananas",
+  "content_ids": [ 42, 314159 ]
+}
+```
+
+##### Sample response: 
+```json
+{
+  "status": true,
+  "result": {
+    "42": {
+      "app_data": {
+        "data": "some_data"
+      },
+      "app_id": 1337,
+      "created_by": 0,
+      "id": 42,
+      "name": "Fun App Content",
+      "text": "Isn't my app great?",
+      "thumb_url": "http://yourapp.com/app_thumb.png",
+      "type": "app_content"
+    },
+    "314159": {
+      "app_data": {
+        "is_fun": false
+      },
+      "app_id": 1337,
+      "created_by": 0,
+      "id": 314159,
+      "name": "Not so fun App Content",
+      "text": "Apparently it wasn't as fun as I thought",
+      "thumb_url": "http://yourapp.com/app_thumb_boring.png",
+      "type": "app_content"
+    }
+  }
+}
+
+```
