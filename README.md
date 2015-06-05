@@ -38,6 +38,55 @@ Obviously, as you improve your app, it should utilize the data stored in the app
 
 Your IFRAME will get certain information from LockerDome about its context. This will include the account id and a special app specific login token that the app can use to create app content on behalf of the user. Additionally, the app may request an increase in the height of its iframe and get updates if the user logs in while the app’s iframe is open. See the example and include the script file http://api.globalhack4.test.lockerdome.com/globalhack_app_platform.js
 
+### Initial Data
+
+When your App's `ui_url` is fetched, some information is also passed by lockerdome through the GET request. The `app_platform` script does a good job of reading this data for you. The app platform allows you to access a variable named `LD` (LockerDome). The LD variable contains the following:
+
+| Field               | Type      | Description                                                                     |
+|---------------------|-----------|---------------------------------------------------------------------------------|
+| account_id          | int       | The ID of the LockerDome account accessing your app.                            |
+| app_id              | int       | Your app's `id`                                                                 |
+| ld_url              | String    | The active LockerDome URL. In most cases this is just "https://lockerdome.com"  |
+| login_token         | String    | A login token for **your app** unique to the user accessing it.                 |
+| args                | Object    | Arguments passed by LockerDome to your app. See [Arguments](#arguments) below.  |
+
+### Arguments
+
+In addition to passing information about the user to your app, LockerDome also passes arguments. These arguments can be used by your application to determine what content the user is trying to access, and what operation to run (as of now this is always `render_content`). The arguments are detailed below.
+
+| Argument    | Type    | Description                                                                   |
+|-------------|---------|-------------------------------------------------------------------------------|
+| id          | int     | The content ID being accessed by the user.                                    |
+| op          | String  | The desired operation of your application (always `render_content` as of now) |
+
+
+### Functions
+
+The LockerDome app platform also includes a few client-side JavaScript functions. These functions allow your iframe to communicate with the main LockerDome page that it's embedded on. Currently, the following functions have been implemented.
+
+#### request_width
+
+The `request_width` function allows you to change the width of your app's frame.
+
+| Argument    | Type    | Description                                                                           |
+|-------------|---------|---------------------------------------------------------------------------------------|
+| new_width   | String  | The desired width of your frame. This accepts any valid CSS value (400px, 100%, etc.) |
+
+### request_height 
+
+The `request_height` function allows you to change the height of your app's frame. 
+
+| Argument    | Type    | Description                                                                             |
+|-------------|---------|-----------------------------------------------------------------------------------------|
+| new_height  | String  | The desired height of your frame. This accepts any valid CSS value (400px, 100%, etc.)  |
+
+### request_redirect
+
+Since your app is embedded in an iframe, you won't be able to execute browser redirects. If necessary, LockerDome can do this for you. A call to the `request_redirect` function will redirect the user to a desired URL.
+
+| Argument  | Type    | Description                                                                     |
+|-----------|---------|---------------------------------------------------------------------------------|
+| path      | String  | The desired redirect URL. This will be checked by LockerDome before execution.  |
 ## Server Side APIs
 
 The server-sided app API calls currently consist of the following:
@@ -117,7 +166,7 @@ If all goes well, we should receive something along the lines of the following.
 }
 ```
 
-Let's take a look at the response. The first field is the status of the transaction. Hopefully it's true, if it's not, see [Handling Errors](#handling-errors). The `result` object is what we're interested in here. With LockerDome API calls, `result` is the returned data. In our case, it's the object that we've just created. Let's take a look at the fields. We won't include fields that we passed in our request.  
+Let's take a look at the response. The first field is the status of the transaction. Hopefully it's true, if it's not, see [Handling Errors](#errors). The `result` object is what we're interested in here. With LockerDome API calls, `result` is the returned data. In our case, it's the object that we've just created. Let's take a look at the fields. We won't include fields that we passed in our request.  
 
 | Field       | Type    | Description                                                                           |
 |-------------|---------|---------------------------------------------------------------------------------------|
@@ -378,5 +427,8 @@ https://api.lockerdome.com/app_fetch_batch_data?
     }
   }
 }
-
 ```
+
+### Errors
+
+When making server side API calls, you can run into a few errors. 
