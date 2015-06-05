@@ -431,4 +431,11 @@ https://api.lockerdome.com/app_fetch_batch_data?
 
 ### Errors
 
-When making server side API calls, you can run into a few errors. 
+When making server side API calls, you can run into a few errors. We try to be as helpful as possible with the error message you receive when an operation fails. Errors are returned in this format:
+```json
+{
+  "status": false,
+  "error_message": "A short message detailing the error. It'll help you resolve it."
+}
+```
+In your app, you should always check the `status` field of a response before trying to process it. `status` will be true if the operation was a success, and false if it fails.
