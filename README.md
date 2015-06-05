@@ -54,19 +54,19 @@ Obviously, as you improve your app, it should utilize the data stored in the app
 
 ## Client Side APIs
 
-Your IFRAME will get certain information from LockerDome about its context. This will include the account id and a special app specific login token that the app can use to create app content on behalf of the user. Additionally, the app may request an increase in the height of its iframe and get updates if the user logs in while the app’s iframe is open. See the example and include the script file http://api.globalhack4.test.lockerdome.com/globalhack_app_platform.js
+Your IFRAME will get certain information from LockerDome about its context. This will include the account id and a special app specific login token that the app can use to create app content on behalf of the user. Additionally, the app may request an increase in the height of its iframe and get updates if the user logs in while the app’s iframe is open. See the example and include the script file http://globalhack4.test.lockerdome.com/globalhack_app_platform.js
 
 ### Initial Data
 
 When your App's `ui_url` is fetched, some information is also passed by lockerdome through the GET request. The `app_platform` script does a good job of reading this data for you. The app platform allows you to access a variable named `LD` (LockerDome). The LD variable contains the following:
 
-| Field               | Type      | Description                                                                     |
-|---------------------|-----------|---------------------------------------------------------------------------------|
-| account_id          | int       | The ID of the LockerDome account accessing your app.                            |
-| app_id              | int       | Your app's `id`                                                                 |
-| ld_url              | String    | The active LockerDome URL. In most cases this is just "https://lockerdome.com"  |
-| login_token         | String    | A login token for **your app** unique to the user accessing it.                 |
-| args                | Object    | Arguments passed by LockerDome to your app. See [Arguments](#arguments) below.  |
+| Field               | Type      | Description                                                                                     |
+|---------------------|-----------|-------------------------------------------------------------------------------------------------|
+| account_id          | int       | The ID of the LockerDome account accessing your app.                                            |
+| app_id              | int       | Your app's `id`                                                                                 |
+| ld_url              | String    | The active LockerDome URL. In most cases this is just "http://globalhack4.test.lockerdome.com"  |
+| login_token         | String    | A login token for **your app** unique to the user accessing it.                                 |
+| args                | Object    | Arguments passed by LockerDome to your app. See [Arguments](#arguments) below.                  |
 
 ### Arguments
 
@@ -142,17 +142,19 @@ Allows your app to create and hang content.
 
 This API call accepts the following parameters:
 
-| Parameter   | Type    | Required  | Description                                 |
-|-------------|---------|-----------|---------------------------------------------|
-| name        | String  | No        | Your app content's title. Keep it concise   |
-| thumb_url   | String  | No        | An optional (but recommended) thumbnail url |
-| text        | String  | No        | An optional alt-text for your content       |
-| app_data    | Object  | No        | Optional data passed to your app (unique)   |
+| Parameter   | Type    | Required      | Description                                                                                     |
+|-------------|---------|---------------|-------------------------------------------------------------------------------------------------|
+| name        | String  | No            | Your app content's title. Keep it concise                                                       |
+| thumb_url   | String  | No            | An optional (but recommended) thumbnail url                                                     |
+| text        | String  | No            | An optional alt-text for your content                                                           |
+| app_data    | Object  | No            | Optional data passed to your app (unique)                                                       |
+| created_by  | int     | No            | Optional id of the user creating the content                                                    |
+| auth_token  | String  | if created_by | If created_by is set, an auth token allowing your app to publish content as the specified user  |
 
 Let's make a sample request. This sample will be nicely formatted and won't be url-encoded, however, actual requests need to be url-encoded.
 
 ```json
-https://api.lockerdome.com/app_create_content?
+http://api.globalhack4.test.lockerdome.com/app_create_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -191,7 +193,7 @@ Let's take a look at the response. The first field is the status of the transact
 | created_by  | int     | The `id` of the user that created the content. This defaults to the owner of the app. |
 | id          | int     | The `id` of your content. It wouldn't be a bad idea to store this somewhere.          |
 
-###app_destroy_content
+### app_destroy_content
 
 Allows your app to destroy content as long as it has permission.
 
@@ -203,7 +205,7 @@ Allows your app to destroy content as long as it has permission.
 
 ##### Sample request:
 ```json
-https://api.lockerdome.com/app_create_content?
+http://api.globalhack4.test.lockerdome.com/app_create_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -230,7 +232,7 @@ Allows your app to fetch information about any content posted on LockerDome.
 
 ##### Sample request:
 ```json
-https://api.lockerdome.com/app_create_content?
+http://api.globalhack4.test.lockerdome.com/app_create_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -274,7 +276,7 @@ Allows you to update content created by your app. This is useful if your app uti
 ##### Sample request:
 
 ```json
-https://api.lockerdome.com/app_update_content?
+http://api.globalhack4.test.lockerdome.com/app_update_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -318,7 +320,7 @@ Allows your app to fetch all content created by a specified user.
 
 ##### Sample request: 
 ```json
-https://api.lockerdome.com/app_fetch_user_content?
+http://api.globalhack4.test.lockerdome.com/app_fetch_user_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -370,7 +372,7 @@ Allows your app to fetch the account name and slug of specified user(s).
 
 ##### Sample request: 
 ```json
-https://api.lockerdome.com/app_get_account_name_and_slug?
+http://api.globalhack4.test.lockerdome.com/app_get_account_name_and_slug?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -406,7 +408,7 @@ https://api.lockerdome.com/app_get_account_name_and_slug?
 
 ##### Sample request:
 ```json
-https://api.lockerdome.com/app_fetch_batch_data?
+http://api.globalhack4.test.lockerdome.com/app_fetch_batch_data?
 {
   "app_id": 1337,
   "app_secret": "bananas",
