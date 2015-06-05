@@ -30,7 +30,7 @@ In order to create an app on LockerDome, a user account must first be created. F
 4. Visit [the app creation page](http://globalhack4.test.lockerdome.com/app/create)
 5. Enter a name for your application
 6. Enter a URL that will serve as the base URL of iframes’ src attribute that LockerDome will generate to hand off the rendering of your app’s content to your server. Specify something that can accept a query string that will be json and url encoded because this URL will serve as the master controller for your app.
-7. Submit the form. Be sure to record your app id and secret, you'll need those below.
+7. Submit the form. You should receive an email with some information about your app. Be sure to keep the app secret and id safe, you'll need them to perform API calls. 
 
 ## Creating your first piece of app content
 

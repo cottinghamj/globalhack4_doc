@@ -1,0 +1,24 @@
+---
+title: LD Sample App
+published: true
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ site.name }}</title>
+    <meta name="keywords" value="{% if page.meta_keywords %}{{ page.meta_keywords }}{% else %}{{ site.meta_keywords }}{% endif %}" />
+    <meta name="description" value="{% if page.meta_description %}{{ page.meta_description }}{% else %}{{ site.meta_description }}{% endif %}" />
+    {{ 'styles.css' | stylesheet_tag }}
+  </head>
+  <body>
+  <div class="wrapper">
+    {% block 'main' %}
+    hey, you're home
+    {% endblock %}
+  </div>
+  </body>
+  {{ 'jquery.js' | javascript_tag }}
+  {% block 'scripts' %}
+  {% endblock %}
+</html>

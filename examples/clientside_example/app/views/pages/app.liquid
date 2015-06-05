@@ -1,0 +1,53 @@
+---
+title: App
+published: true
+---
+{% extends parent %}
+
+{% block main %}
+	<div class="center">
+		<h1>Hey, you're on an app.</h1>
+		<p>Let's test some of the LockerDome App API</p>
+		<div>
+			<input type="text" id="request_width" placeholder="Set frame width"/>
+			<input type="submit" id="request_width_submit">
+		</div>
+		<div>
+			<input type="text" id="request_height" placeholder="Set frame height"/>
+			<input type="submit" id="request_height_submit">
+		</div>			
+		<div>
+			<input type="text" id="request_z_index" placeholder="Get z-index (input a selector)"/>
+			<input type="submit" id="request_z_index_submit">
+		</div>	
+		<div>
+			<input type="text" id="request_redirect" placeholder="Redirect..."/>
+			<input type="submit" id="request_redirect_submit">
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+	{{ 'app_platform.js' | javascript_tag }}
+	<script type="text/javascript">
+		if (LD !== undefined) {
+		  LD.request_height(400);
+		  $('#request_width_submit').click(function(e) {
+		    LD.request_width($('#request_width').val())
+		    $('#request_width').val('');
+		  })
+		  $('#request_height_submit').click(function(e) {
+		    LD.request_height($('#request_height').val())
+		    $('#request_height').val('');
+		  })
+		  $('#request_z_index_submit').click(function(e) {
+		    LD.request_z_index($('#request_z_index').val())
+		    $('#request_z_index').val('')
+		  })
+		  $('#request_redirect_submit').click(function(e) {
+		    LD.request_redirect($('#request_redirect').val())
+		    $('#request_redirect').val('')
+		  })
+		}
+	</script>
+{% endblock %}
