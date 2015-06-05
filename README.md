@@ -54,7 +54,7 @@ Obviously, as you improve your app, it should utilize the data stored in the app
 
 ## Client Side APIs
 
-Your IFRAME will get certain information from LockerDome about its context. This will include the account id and a special app specific login token that the app can use to create app content on behalf of the user. Additionally, the app may request an increase in the height of its iframe and get updates if the user logs in while the app’s iframe is open. See the example and include the script file http://globalhack4.test.lockerdome.com/globalhack_app_platform.js
+Your IFRAME will get certain information from LockerDome about its context. This will include the account id and a special app specific login token that the app can use to create app content on behalf of the user. Additionally, the app may request an increase in the height of its iframe and get updates if the user logs in while the app’s iframe is open. See the example and include the script file http://globalhack4.test.lockerdome.com/gh_app_platform.js
 
 ### Initial Data
 
