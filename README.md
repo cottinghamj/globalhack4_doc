@@ -461,17 +461,24 @@ This api fetches the fields of a piece of content, specifically it's 'like' and 
 
 ##### Parameters
 
-| Parameter   | Type     | Required  | Description                                                          |
-|-------------|----------|-----------|----------------------------------------------------------------------|
-| content_id  | +int     | Yes       | The content `id` to fetch                                            |
-| type        | string   | Yes       | A specification of the `type` to fetch (content in this case)        |     
-| fields      | string[] | Yes       | An array of the content `fields` to fetch                            |
+| Parameter   | Type     | Required  | Description                                                   |
+|-------------|----------|-----------|---------------------------------------------------------------|
+| content_id  | +int     | Yes       | The content `id` to fetch                                     |
+| type        | string   | Yes       | A specification of the `type` to fetch (content in this case) |     
+| fields      | string[] | Yes       | An array of the content `fields` to fetch                     |
+
+##### Fields
+
+| Field         | Description                                                       |
+|---------------|-------------------------------------------------------------------|
+| like_count    | The number of times the `interesting` button has been clicked     |
+| dislike_count | The number of times the `not interesting` button has been clicked |
 
 ##### Sample request:
 ```json
 http://api.globalhack4.test.lockerdome.com/fetch?
 {
-  "id": 42,
+  "id": 7740042034282516,
   "type": "content",
   "fields": ["like_count", "dislike_count"]
 }
