@@ -52,6 +52,10 @@ If your server that should be handling the iframe request isn’t set up to hand
 
 Obviously, as you improve your app, it should utilize the data stored in the app content to control what it shows. For example, if you created a poll, you might store the options in the app data. If you look at the example above, you’ll see that we passed `{"fun":"times"}` as our app_data. You can use anything you want there that is valid JSON. There is a size limit, but it is on the order of a few KB. If you need to store more than that, you should use a database on your server.
 
+## Embedding
+
+In order to test embedding your app, you can use [jsfiddle](http://jsfiddle.net). You can retrieve your content's embed code by clicking the '...' at the bottom right of the content feed item. Paste your code in jsfiddle, and **make sure** you are *not* using SSL.  
+
 ## Client Side APIs
 
 Your IFRAME will get certain information from LockerDome about its context. This will include the account id and a special app specific login token that the app can use to create app content on behalf of the user. Additionally, the app may request an increase in the height of its iframe and get updates if the user logs in while the app’s iframe is open. See the example and include the script file http://globalhack4.test.lockerdome.com/gh_app_platform.js
@@ -205,7 +209,7 @@ Allows your app to destroy content as long as it has permission.
 
 ##### Sample request:
 ```json
-http://api.globalhack4.test.lockerdome.com/app_destroy_content?
+http://api.globalhack4.test.lockerdome.com/app_create_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -232,7 +236,7 @@ Allows your app to fetch information about any content posted on LockerDome.
 
 ##### Sample request:
 ```json
-http://api.globalhack4.test.lockerdome.com/app_fetch_content?
+http://api.globalhack4.test.lockerdome.com/app_create_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
