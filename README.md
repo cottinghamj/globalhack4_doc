@@ -18,6 +18,7 @@ LockerDome applications are made to be extremely flexible and powerful. The prim
     * [app_fetch_user_content](#app_fetch_user_content)
     * [app_get_account_name_and_slug](#app_get_account_name_and_slug)
     * [app_fetch_batch_data](#app_fetch_batch_data)
+    * [fetch](#fetch)
     * [Errors](#errors)
 
 ## Creating an App
@@ -120,6 +121,7 @@ The server-sided app API calls currently consist of the following:
 + [app_fetch_user_content](#app_fetch_user_content)
 + [app_get_account_name_and_slug](#app_get_account_name_and_slug)
 + [app_fetch_batch_data](#app_fetch_batch_data)
++ [fetch](#fetch)
 
 All *app* API calls require the following parameters:
 
@@ -209,7 +211,7 @@ Allows your app to destroy content as long as it has permission.
 
 ##### Sample request:
 ```json
-http://api.globalhack4.test.lockerdome.com/app_create_content?
+http://api.globalhack4.test.lockerdome.com/app_destroy_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -236,7 +238,7 @@ Allows your app to fetch information about any content posted on LockerDome.
 
 ##### Sample request:
 ```json
-http://api.globalhack4.test.lockerdome.com/app_create_content?
+http://api.globalhack4.test.lockerdome.com/app_fetch_content?
 {
   "app_id": 1337,
   "app_secret": "bananas",
@@ -449,6 +451,39 @@ http://api.globalhack4.test.lockerdome.com/app_fetch_batch_data?
       "thumb_url": "http://yourapp.com/app_thumb_boring.png",
       "type": "app_content"
     }
+  }
+}
+```
+
+### fetch
+
+This api fetches the fields of a piece of content, specifically it's 'like' and 'disklike' count.
+
+##### Parameters
+
+| Parameter   | Type     | Required  | Description                                                          |
+|-------------|----------|-----------|----------------------------------------------------------------------|
+| content_id  | +int     | Yes       | The content `id` to fetch                                            |
+| type        | string   | Yes       | A specification of the `type` to fetch (content in this case)        |     
+| fields      | string[] | Yes       | An array of the content `fields` to fetch                            |
+
+##### Sample request:
+```json
+http://api.globalhack4.test.lockerdome.com/fetch?
+{
+  "id": 42,
+  "type": "content",
+  "fields": ["like_count", "dislike_count"]
+}
+```
+
+##### Sample response: 
+```json
+{
+  "status": true,
+  "result": {
+    "dislike_count": 0, 
+    "like_count": 9001
   }
 }
 ```
